@@ -13,9 +13,18 @@ RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 
 # Inicializando as credenciais usando a conta de serviço
 def init_google_sheets():
-    # Carregar as credenciais da variável de ambiente (formato TOML)
-    creds_json = os.getenv('google_creds')  # Carrega a variável de ambiente
-    creds_dict = json.loads(creds_json)  # Converte de string JSON para dicionário
+    # Carrega a variável de ambiente 'google_creds' dos Secrets do Streamlit
+    creds_json = os.getenv('google_creds')  # A variável de ambiente contendo as credenciais
+    
+    if not creds_json:
+        raise ValueError("A variável de ambiente 'google_creds' não foi encontrada ou está vazia.")
+    
+    # Tenta carregar o conteúdo JSON
+    try:
+        creds_dict = json.loads(creds_json)  # Converte de string JSON para dicionário
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Erro ao decodificar o JSON: {e}")
+    
     creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
     return creds
 
@@ -42,9 +51,12 @@ def salvar_dados(produto, valor):
             valueInputOption="RAW",
             body=body
         ).execute()
-        st.write("Dados salvos na planilha com sucesso!")
+
+        st.success("Dados salvos na planilha com sucesso!")
     except HttpError as err:
-        st.write("Erro ao salvar na planilha:", err)
+        st.error(f"Erro ao acessar a planilha: {err}")
+    except Exception as e:
+        st.error(f"Erro desconhecido: {e}")
 
 # Código do Streamlit
 st.title("Formulário de Cotação")
