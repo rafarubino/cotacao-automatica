@@ -1,6 +1,6 @@
 import os
-import json
 import streamlit as st
+import json
 from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
@@ -11,24 +11,25 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # apenas a parte ID
 RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 
-# Inicializando as credenciais usando a conta de serviço
+# Função para inicializar as credenciais do Google
 def init_google_sheets():
-    # Carrega a variável de ambiente 'google_creds' dos Secrets do Streamlit
-    creds_json = os.getenv('google_creds')  # A variável de ambiente contendo as credenciais
+    # Carregar a variável de ambiente 'google_creds' dos Secrets do Streamlit
+    creds_json = os.getenv('google_creds')
     
     if not creds_json:
         raise ValueError("A variável de ambiente 'google_creds' não foi encontrada ou está vazia.")
     
-    # Tenta carregar o conteúdo JSON
     try:
-        creds_dict = json.loads(creds_json)  # Converte de string JSON para dicionário
+        # Converte de string JSON para dicionário
+        creds_dict = json.loads(creds_json)
     except json.JSONDecodeError as e:
         raise ValueError(f"Erro ao decodificar o JSON: {e}")
     
+    # Cria as credenciais usando o dicionário
     creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
     return creds
 
-# Função para salvar os dados no Google Sheets
+# Função para salvar os dados na planilha do Google Sheets
 def salvar_dados(produto, valor):
     creds = init_google_sheets()
     try:
@@ -51,12 +52,9 @@ def salvar_dados(produto, valor):
             valueInputOption="RAW",
             body=body
         ).execute()
-
-        st.success("Dados salvos na planilha com sucesso!")
+        st.write("Dados salvos na planilha com sucesso!")
     except HttpError as err:
-        st.error(f"Erro ao acessar a planilha: {err}")
-    except Exception as e:
-        st.error(f"Erro desconhecido: {e}")
+        st.write("Erro ao salvar na planilha:", err)
 
 # Código do Streamlit
 st.title("Formulário de Cotação")
