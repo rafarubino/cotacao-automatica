@@ -13,12 +13,15 @@ RANGE_NAME = "fornecedores!A:D"  # Altere o nome da aba se necessário
 # Função para inicializar as credenciais do Google
 def init_google_sheets():
     # Carregar as credenciais diretamente do Streamlit Secrets
-    creds_dict = st.secrets["google_creds"]  # Acessando a seção 'google_creds' no secrets.toml
+    creds_json = st.secrets["google_creds"]  # Acessando a seção 'google_creds' no secrets.toml
     
-    if not creds_dict:
+    if not creds_json:
         raise ValueError("A variável de segredo 'google_creds' não foi encontrada ou está vazia.")
     
     try:
+        # Converte a string JSON para um dicionário
+        creds_dict = json.loads(creds_json)
+        
         # Cria as credenciais usando o dicionário
         creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
     except Exception as e:
