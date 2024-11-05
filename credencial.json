@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cotacao-automatica-440122",
+  "private_key_id": "010961e66c780b1df17141830170ffc670225c76",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCmFCCC7kDzze8R\ncFAdu768cr3v4BtyOhcnXjFPliZ6QPygOnKOK3fH2UM2iIvffids3eWMgg6ILQMF\nOPkfrN7WUI5dwQGSDSiWO+NXM/RrJL48gKHLuqgZwS6AxarlbnmdJ5cueTQQWHV2\ntHqLUXPc8rej4+YqFtJWVATOtNleGeXyCoDSvH7jI5+MBOQ6FBeMtlPKRr+Oz9j3\nRckufE10Pubtj3aonvpIQwCc6p8pA5XGme1VUUSA2MGlOg7n2rIBLj9vMaz5+O7X\nmCE+FRZ7afyfygBTuq3G9ZQzFHJ0QUbdOaZuILeDL+DNoyq2Z/k0qu6O8irfLnv+\nR5UoNH+TAgMBAAECggEAPZ1V+n1eB5WtTjD26DERMGT5ZpckV5qJoIdnj/lKySx3\nDRLiETC7PZ+zOfYqvn3VLqScVyahMZBRgIyEkGXYPnagetPyOzc6iZIqY93Yni+B\njHzEigrz9qofEJNFNd1orQ9VHV7GHBJVcfa/SBSuAZji3KDecVsKKhD9v5qE0k38\nanyc3owlBPhrzDfWSVCTNZzEkPhYBENDFYVdY/FAgePIQUo89EhBX9Wm6AzpU24Q\n3HVDLCGsrh2fK7JKKRnb+x9Tc/pADJJoOgsBV9TeQ6y7kr8qb1SP+ZNmoZWUuR4g\nNnXc8MO1wZ+iI/5euUnYa5xJSw8ojupiHiTnksuCYQKBgQDQHjtYKtCqig5ev007\n4MTF4Xjr530GqDRE19umDIEvhLZksgwIE+zgFchW8aW6/SHfBEUYQ8VN28z6L5ly\nU0JfNZ3VV4omdL+PEPlKWI+gQI5uj54QRtVEXVFegnYqEcWF6XYTHEL2IBy7nBWp\nf8XRrzbvUcwC9UZNcsZ8BeyYGQKBgQDMSdk7MheM0uiPcaVqjZZc09xTzKrs4t31\nsknIZuAYUoCBVjWkSzu4Bk9hkfWi3hRVd2gFFjZwZzz06NHDGgRm376sIxeIIhmh\nrp9ktlQZ7YByFTJZD38u7wHaCS9uXZwwmDmMN3lTPZPE26GmR15PIwV53ZAUr+de\n6MI2QpJ6iwKBgQCeJArGESqkG+mVd1nxwPbkwlLHNwya7V9iXH/sKh5UBE0wMNbR\noIpjMEoePtrHPqfpNe5m5MBdTELybQ71f2y0uiInxbAVTqtsw+IZ6zef9s4EFx9t\nkNVncF1vKkUt7HkiK2dsWBJNwdLzgEQ5mvyvO6vLqGUUblowaaGHBl1kqQKBgQCV\n4PBhf8TLasl4xDZKUIqqnD0fth8JIQEbi6yaPO/YqF7jhS5h1ViBERAYU4/V5/0f\nHzXP1ZYnLXcJb+7Fp0bneuxXOn+/PtVzS7xhlWtqglckW+zObpIvCude4jJMVJ2N\nAYHnH6QBsEHDwid86QuGH/maiTV2GAA2H6qtSHZTNQKBgFQX+2ijnqzlf3DCOJO7\nKpvbJC+PLX8FBBqzXYzj7Anrntm3TBrWCKPyV52Swmd7cre386sM6iGyp0CGhrYp\n2LyPZYJrPkaoWHrbPR1hodeatnJsXQn3totDWX3GV5GCh5dDFw2X0N9SYc/AGLF8\nPUveK3aiCG+25M11sxSTWLQw\n-----END PRIVATE KEY-----\n",
+  "client_email": "rafarubino@cotacao-automatica-440122.iam.gserviceaccount.com",
+  "client_id": "108009357385155488662",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rafarubino%40cotacao-automatica-440122.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
