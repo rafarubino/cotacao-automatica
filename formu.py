@@ -1,4 +1,5 @@
 import os
+import json
 import streamlit as st
 from datetime import datetime
 from google.oauth2.service_account import Credentials
@@ -12,7 +13,10 @@ RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 
 # Inicializando as credenciais usando a conta de serviço
 def init_google_sheets():
-    creds = Credentials.from_service_account_file("credencial.json", scopes=SCOPES)
+    # Carregar as credenciais da variável de ambiente
+    creds_json = os.getenv('google_creds')  # Carrega a variável de ambiente
+    creds_dict = json.loads(creds_json)  # Converte de string JSON para dicionário
+    creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
     return creds
 
 # Função para salvar os dados no Google Sheets
