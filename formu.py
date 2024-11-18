@@ -3,14 +3,14 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from datetime import datetime
+import pytz
 
-# Definindo os escopos e ID da planilha
+# Definindo o ID da planilha
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # apenas a parte ID
-RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
+RANGE_NAME = "fornecedores!A:D"  # aba da planilha
 
-# Função para obter as credenciais da conta de serviço a partir de st.secrets
-def init_google_sheets():
+# Função para obter as credenciais da conta de serviço que estão ocultas no streamlit
     google = {
         "type": st.secrets["type"],
         "project_id": st.secrets["project_id"],
@@ -34,8 +34,12 @@ def salvar_dados(produto, valor):
         service = build("sheets", "v4", credentials=creds)  # Conecta com a API do Google Sheets
 
         # Identificar a data e hora atuais
-        data_atual = datetime.now().strftime("%Y-%m-%d")
-        hora_atual = datetime.now().strftime("%H:%M:%S")
+        fuso_horario_brasil = pytz.timezone("America/Sao_Paulo") # Define o fuso horário do Brasil        
+        data_hora_brasil = datetime.now(fuso_horario_brasil) # Data e a hora atual no horário do Brasil
+
+        # Formata a data e a hora
+        data_atual = data_hora_brasil.strftime("%Y-%m-%d")
+        hora_atual = data_hora_brasil.strftime("%H:%M:%S")
 
         # Preparar os dados para envio
         valores = [[data_atual, hora_atual, produto, valor]]
