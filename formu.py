@@ -1,5 +1,5 @@
+import os
 import streamlit as st
-import json
 from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
@@ -7,31 +7,17 @@ from googleapiclient.errors import HttpError
 
 # Definindo os escopos e ID da planilha
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # Apenas a parte ID
-RANGE_NAME = "fornecedores!A:D"  # Altere o nome da aba se necessário
+SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # apenas a parte ID
+RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 
-# Função para inicializar as credenciais do Google
+# Inicializando as credenciais usando a conta de serviço
 def init_google_sheets():
-    # Carregar as credenciais diretamente do Streamlit Secrets
-    creds_json = st.secrets["google_creds"]  # Acessando a seção 'google_creds' no secrets.toml
-    
-    if not creds_json:
-        raise ValueError("A variável de segredo 'google_creds' não foi encontrada ou está vazia.")
-    
-    try:
-        # Converte a string JSON para um dicionário
-        creds_dict = json.loads(creds_json)
-        
-        # Cria as credenciais usando o dicionário
-        creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
-    except Exception as e:
-        raise ValueError(f"Erro ao criar credenciais do Google: {e}")
-    
+    creds = Credentials.from_service_account_file(st.secrets["credencial_key"], scopes=SCOPES)
     return creds
 
-# Função para salvar os dados na planilha do Google Sheets
+# Função para salvar os dados no Google Sheets
 def salvar_dados(produto, valor):
-    creds = init_google_sheets()  # Inicializando as credenciais
+    creds = init_google_sheets()
     try:
         service = build("sheets", "v4", credentials=creds)
 
