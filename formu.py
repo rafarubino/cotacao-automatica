@@ -1,25 +1,25 @@
-import os
 import streamlit as st
-from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from datetime import datetime
 
 # Definindo os escopos e ID da planilha
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # apenas a parte ID
 RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 
-# Inicializando as credenciais usando a conta de serviço
+# Função para obter as credenciais da conta de serviço a partir de st.secrets
 def init_google_sheets():
-    creds = Credentials.from_service_account_file(st.secrets["credencial_key"], scopes=SCOPES)
+    creds_info = st.secrets["google"]  # Obtém o dicionário de credenciais de st.secrets
+    creds = Credentials.from_service_account_info(creds_info, scopes=SCOPES)
     return creds
 
-# Função para salvar os dados no Google Sheets
+# Função para salvar os dados na planilha
 def salvar_dados(produto, valor):
-    creds = init_google_sheets()
+    creds = init_google_sheets()  # Inicializa as credenciais
     try:
-        service = build("sheets", "v4", credentials=creds)
+        service = build("sheets", "v4", credentials=creds)  # Conecta com a API do Google Sheets
 
         # Identificar a data e hora atuais
         data_atual = datetime.now().strftime("%Y-%m-%d")
@@ -38,9 +38,9 @@ def salvar_dados(produto, valor):
             valueInputOption="RAW",
             body=body
         ).execute()
-        st.write("Dados salvos na planilha com sucesso!")
+        st.write("Dados salvos na planilha com sucesso!")  # Mensagem de sucesso
     except HttpError as err:
-        st.write("Erro ao salvar na planilha:", err)
+        st.write("Erro ao salvar na planilha:", err)  # Mensagem de erro
 
 # Código do Streamlit
 st.title("Formulário de Cotação")
