@@ -12,7 +12,7 @@ RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
 # Função para obter as credenciais da conta de serviço a partir de st.secrets
 def init_google_sheets():
     creds_info = st.secrets["google"]  # Obtém o dicionário de credenciais de st.secrets
-    creds = Credentials.from_service_account_info(creds_info, scopes=SCOPES)
+    creds = Credentials.from_service_account_info(creds_info)
     return creds
 
 # Função para salvar os dados na planilha
