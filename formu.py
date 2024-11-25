@@ -128,7 +128,7 @@ if st.button("Clique para enviar a resposta"):
     st.write("Enviado!")
 
 # Agendar envio semanal
-schedule.every().monday.at("08:00").do(enviar_emails)
+schedule.every(1).minutes.do(enviar_emails)
 
 # Executar agendador
 while True:
