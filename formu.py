@@ -2,7 +2,7 @@ import streamlit as st
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Definindo os escopos e ID da planilha
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -33,9 +33,9 @@ def salvar_dados(produto, valor):
     try:
         service = build("sheets", "v4", credentials=creds)  # Conecta com a API do Google Sheets
 
-        # Identificar a data e hora atuais
+        # Identificar a data e hora atuais ajustando o horário
         data_atual = datetime.now().strftime("%Y-%m-%d")
-        hora_atual = datetime.now().strftime("%H:%M:%S")
+        hora_atual = (datetime.now() - timedelta(hours=3)).strftime("%H:%M:%S")
 
         # Preparar os dados para envio
         valores = [[data_atual, hora_atual, produto, valor]]
