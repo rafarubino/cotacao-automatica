@@ -55,6 +55,7 @@ def salvar_dados(produto, valor):
         st.write("Erro ao salvar na planilha:", err)  # Mensagem de erro
 
 # Código do Streamlit
+st.image("feriozzi_logo.png", width = 300)
 st.title("Formulário de Cotação")
 st.write("Este formulário tem o intuito de automatizar o processo de cotação")
 
