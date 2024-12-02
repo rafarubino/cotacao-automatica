@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 # Definindo os escopos e ID da planilha
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = "1SbBkuxGIvnww__aw74fiLu1dx9XXJuLGq9KOBYIq-o0"  # apenas a parte ID
-RANGE_NAME = "fornecedores!A:D"  # altere o nome da aba se necessário
+RANGE_NAME = "fornecedores!A:E"  # Alterado para 5 colunas (A a E)
 
 # Função para obter as credenciais da conta de serviço a partir de st.secrets
 def init_google_sheets():
@@ -28,7 +28,7 @@ def init_google_sheets():
     return creds
 
 # Função para salvar os dados na planilha
-def salvar_dados(produto, valor):
+def salvar_dados(fornecedor, produto, valor):
     creds = init_google_sheets()  # Inicializa as credenciais
     try:
         service = build("sheets", "v4", credentials=creds)  # Conecta com a API do Google Sheets
@@ -38,7 +38,7 @@ def salvar_dados(produto, valor):
         hora_atual = (datetime.now() - timedelta(hours=3)).strftime("%H:%M:%S")
 
         # Preparar os dados para envio
-        valores = [[data_atual, hora_atual, produto, valor]]
+        valores = [[hora_atual, data_atual, fornecedor, produto, valor]]
         body = {
             "values": valores
         }
@@ -55,9 +55,15 @@ def salvar_dados(produto, valor):
         st.write("Erro ao salvar na planilha:", err)  # Mensagem de erro
 
 # Código do Streamlit
-st.image("feriozzi_logo.png", width = 150)
+st.image("feriozzi_logo.png", width=150)
 st.title("Formulário de Cotação")
 st.write("Este formulário tem o intuito de automatizar o processo de cotação")
+
+# Nome do fornecedor
+st.header("Fornecedor")
+fornecedor = st.text_input("Digite o nome do fornecedor")
+if fornecedor:
+    st.write('Fornecedor selecionado: ', fornecedor)
 
 # Selecionar o produto
 st.header("Produto")
@@ -73,5 +79,5 @@ if valor:
 
 # Botão para enviar resposta
 if st.button("Clique para enviar a resposta"):
-    salvar_dados(produto, valor)
+    salvar_dados(fornecedor, produto, valor)
     st.write("Enviado!")
